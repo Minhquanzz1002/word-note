@@ -1,6 +1,7 @@
 package com.vn.toeic.repository;
 
 import com.vn.toeic.common.SystemValue.*;
+import com.vn.toeic.common.Constant.*;
 import com.vn.toeic.entity.Vocabulary;
 import com.vn.toeic.mapper.IVocabularyMapper;
 import lombok.RequiredArgsConstructor;

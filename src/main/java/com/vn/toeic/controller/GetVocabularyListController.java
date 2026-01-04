@@ -1,5 +1,6 @@
 package com.vn.toeic.controller;
 
+import com.vn.toeic.common.Constant.ApiEndpoint;
 import com.vn.toeic.request.BaseRequest;
 import com.vn.toeic.response.GetVocabularyListResponse;
 import com.vn.toeic.service.GetVocabularyListService;
@@ -29,7 +30,7 @@ public class GetVocabularyListController extends BaseController<BaseRequest, Get
      * @return a {@link ResponseEntity} containing {@link GetVocabularyListResponse}
      * with the vocabulary list data
      */
-    @GetMapping("/api/get-vocabulary-list")
+    @GetMapping(ApiEndpoint.GET_VOCABULARY_LIST)
     public ResponseEntity<GetVocabularyListResponse> getVocabularyListResponseEntityResponse(
             @ModelAttribute BaseRequest request) {
         GetVocabularyListResponse response = new GetVocabularyListResponse();

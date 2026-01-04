@@ -1,9 +1,11 @@
 package com.vn.toeic.repository;
 
-import com.vn.toeic.common.SystemValue.*;
+import com.vn.toeic.common.Constant.AuditAction;
+import com.vn.toeic.common.Constant.DelFlg;
+import com.vn.toeic.common.Constant.VersionNo;
 import com.vn.toeic.entity.BaseEntity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * BaseRepository defines the common CRUD operations for MyBatis mappers.
@@ -60,7 +62,7 @@ public abstract class BaseRepository<T extends BaseEntity, D> {
      * @param action the audit action being performed (CREATE, UPDATE, DELETE)
      */
     protected void setAuditFields(T entity, AuditAction action) {
-        Date now = new Date();
+        LocalDateTime now = LocalDateTime.now();
 
         switch (action) {
             case CREATE -> {

@@ -3,17 +3,20 @@ package com.vn.toeic.service;
 import com.vn.toeic.common.Utilities;
 import com.vn.toeic.entity.Vocabulary;
 import com.vn.toeic.repository.VocabularyRepository;
-import com.vn.toeic.request.BaseRequest;
+import com.vn.toeic.request.GetVocabularyListRequest;
 import com.vn.toeic.response.GetVocabularyListResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Service class for retrieving the vocabulary list.
  */
+@Service
 @RequiredArgsConstructor
-public class GetVocabularyListService extends BaseService<BaseRequest, GetVocabularyListResponse> {
+public class GetVocabularyListService extends BaseService<GetVocabularyListRequest, GetVocabularyListResponse> {
 
     /**
      * Repository used to access vocabulary data from the database.
@@ -28,8 +31,11 @@ public class GetVocabularyListService extends BaseService<BaseRequest, GetVocabu
      * @return a {@link GetVocabularyListResponse} containing the vocabulary list
      */
     @Override
-    protected GetVocabularyListResponse mainFunc(BaseRequest request) {
-        List<Vocabulary> vocabularies = this.vocabularyRepository.getAllByCreator(1);
+    protected GetVocabularyListResponse mainFunc(GetVocabularyListRequest request) {
+        Integer offset = Objects.nonNull(request.getOffset()) ? request.getOffset() : 0;
+        Integer limit = Objects.nonNull(request.getLimit()) ? request.getLimit() : 20;
+
+        List<Vocabulary> vocabularies = this.vocabularyRepository.getAllByCreator(1, offset, limit);
 
         GetVocabularyListResponse response = new GetVocabularyListResponse();
         vocabularies.forEach(v -> {

@@ -28,8 +28,7 @@ public abstract class BaseController<T extends BaseRequest, D extends BaseRespon
         if (!Objects.equals(ProcessResult.API_RESPONSE_OK, validateResult)) {
             return this.buildValidateResponse(request, response);
         }
-        D resultResponse = process(request, response);
-        return ResponseEntity.status(HttpStatus.OK).body(resultResponse);
+        return process(request, response);
     }
 
     /**
@@ -50,7 +49,7 @@ public abstract class BaseController<T extends BaseRequest, D extends BaseRespon
      * @param response the response
      * @return {@link ResponseEntity} with success response
      */
-    abstract D process(T request, D response);
+    abstract ResponseEntity<D> process(T request, D response);
 
     /**
      * Build error response (common).
@@ -64,5 +63,19 @@ public abstract class BaseController<T extends BaseRequest, D extends BaseRespon
         response.setStatusCode(HttpStatus.NOT_FOUND.value());
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    /**
+     * Build normal response (common).
+     *
+     * @param request  the request
+     * @param response the response
+     * @return {@link ResponseEntity} with normal response
+     */
+    protected ResponseEntity<D> buildNormalResponse(T request, D response) {
+        response.setProcessResult(ProcessResult.API_RESPONSE_OK);
+        response.setStatusCode(HttpStatus.OK.value());
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

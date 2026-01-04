@@ -12,8 +12,10 @@ public interface IVocabularyMapper extends BaseMapper<Vocabulary, Integer> {
      * Retrieves all vocabularies created by the specified creator.
      *
      * @param creator the creator ID.
+     * @param offset  the offset.
+     * @param limit   the limit.
      * @return the list of vocabularies.
      */
-    List<Vocabulary> getAllByCreator(Integer creator);
+    List<Vocabulary> getAllByCreator(Integer creator, Integer offset, Integer limit);
 
 }

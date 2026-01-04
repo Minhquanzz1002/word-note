@@ -1,7 +1,6 @@
 package com.vn.toeic.repository;
 
-import com.vn.toeic.common.SystemValue.*;
-import com.vn.toeic.common.Constant.*;
+import com.vn.toeic.common.Constant.AuditAction;
 import com.vn.toeic.entity.Vocabulary;
 import com.vn.toeic.mapper.IVocabularyMapper;
 import lombok.RequiredArgsConstructor;
@@ -48,9 +47,11 @@ public class VocabularyRepository extends BaseRepository<Vocabulary, Integer> {
      * Retrieves all vocabularies created by the specified creator.
      *
      * @param creator the creator ID.
+     * @param offset  the offset.
+     * @param limit   the limit.
      * @return the list of vocabularies.
      */
-    public List<Vocabulary> getAllByCreator(Integer creator) {
-        return vocabularyMapper.getAllByCreator(creator);
+    public List<Vocabulary> getAllByCreator(Integer creator, Integer offset, Integer limit) {
+        return vocabularyMapper.getAllByCreator(creator, offset, limit);
     }
 }

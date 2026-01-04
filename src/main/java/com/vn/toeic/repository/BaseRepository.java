@@ -5,7 +5,7 @@ import com.vn.toeic.common.Constant.DelFlg;
 import com.vn.toeic.common.Constant.VersionNo;
 import com.vn.toeic.entity.BaseEntity;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 /**
  * BaseRepository defines the common CRUD operations for MyBatis mappers.
@@ -62,7 +62,7 @@ public abstract class BaseRepository<T extends BaseEntity, D> {
      * @param action the audit action being performed (CREATE, UPDATE, DELETE)
      */
     protected void setAuditFields(T entity, AuditAction action) {
-        LocalDateTime now = LocalDateTime.now();
+        OffsetDateTime now = OffsetDateTime.now();
 
         switch (action) {
             case CREATE -> {

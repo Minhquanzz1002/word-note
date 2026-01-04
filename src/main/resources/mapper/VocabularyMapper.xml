@@ -85,6 +85,11 @@
             VERSION_NO
         FROM
             VOCABULARIES
+        WHERE
+            CREATOR = #{creator, jdbcType=INTEGER}
+            AND DEL_FLG = ${@com.vn.toeic.common.Constant$DelFlg@NOT_DELETED}
+        OFFSET #{offset, jdbcType=INTEGER}
+        LIMIT #{limit, jdbcType=INTEGER}
     </select>
 
 </mapper>

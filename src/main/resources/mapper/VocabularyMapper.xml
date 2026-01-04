@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vn.toeic.mapper.IVocabularyMapper">
+
+    <!-- ======================
+         RESULT MAPPING
+    ======================= -->
+    <resultMap id="VocabularyResultMap" type="com.vn.toeic.entity.Vocabulary">
+        <id property="id" column="id"/>
+        <result property="word" column="word"/>
+        <result property="meaning" column="meaning"/>
+        <result property="synonyms" column="synonyms"/>
+        <result property="example" column="example"/>
+
+        <!-- BaseEntity fields -->
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="deletedAt" column="deleted_at"/>
+        <result property="delFlg" column="del_flg"/>
+        <result property="versionNo" column="version_no"/>
+    </resultMap>
+
+
+    <!-- ======================
+         INSERT
+    ======================= -->
+    <insert id="save" parameterType="com.vn.toeic.entity.Vocabulary">
+        INSERT INTO vocabulary (
+        word,
+        meaning,
+        synonyms,
+        example,
+        created_at,
+        updated_at,
+        del_flg,
+        version_no
+        ) VALUES (
+        #{word},
+        #{meaning},
+        #{synonyms},
+        #{example},
+        #{createdAt},
+        #{updatedAt},
+        #{delFlg},
+        #{versionNo}
+        )
+    </insert>
+
+
+    <!-- ======================
+         UPDATE
+    ======================= -->
+    <update id="update" parameterType="com.vn.toeic.entity.Vocabulary">
+        UPDATE vocabulary
+        SET
+        word = #{word},
+        meaning = #{meaning},
+        synonyms = #{synonyms},
+        example = #{example},
+        updated_at = #{updatedAt},
+        version_no = version_no + 1
+        WHERE id = #{id}
+        AND del_flg = 0
+    </update>
+
+
+    <!-- ======================
+         DELETE (SOFT DELETE)
+    ======================= -->
+    <update id="delete" parameterType="com.vn.toeic.entity.Vocabulary">
+        UPDATE vocabulary
+        SET
+        del_flg = 1,
+        deleted_at = #{deletedAt},
+        updated_at = #{updatedAt}
+        WHERE id = #{id}
+        AND del_flg = 0
+    </update>
+
+
+    <!-- ======================
+         FIND BY ID
+    ======================= -->
+    <select id="findById" parameterType="int" resultMap="VocabularyResultMap">
+        SELECT *
+        FROM vocabulary
+        WHERE id = #{id}
+        AND del_flg = 0
+    </select>
+
+</mapper>

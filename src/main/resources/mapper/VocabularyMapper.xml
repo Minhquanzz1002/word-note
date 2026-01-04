@@ -4,11 +4,8 @@
 
 <mapper namespace="com.vn.toeic.mapper.IVocabularyMapper">
 
-    <!-- ======================
-         RESULT MAPPING
-    ======================= -->
-    <resultMap id="VocabularyResultMap" type="com.vn.toeic.entity.Vocabulary">
-        <id property="id" column="id"/>
+    <resultMap id="BaseResultMap" type="com.vn.toeic.entity.Vocabulary">
+        <id property="wordId" column="word_id"/>
         <result property="word" column="word"/>
         <result property="meaning" column="meaning"/>
         <result property="synonyms" column="synonyms"/>
@@ -17,15 +14,10 @@
         <!-- BaseEntity fields -->
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
-        <result property="deletedAt" column="deleted_at"/>
         <result property="delFlg" column="del_flg"/>
         <result property="versionNo" column="version_no"/>
     </resultMap>
 
-
-    <!-- ======================
-         INSERT
-    ======================= -->
     <insert id="save" parameterType="com.vn.toeic.entity.Vocabulary">
         INSERT INTO vocabulary (
         word,
@@ -48,10 +40,6 @@
         )
     </insert>
 
-
-    <!-- ======================
-         UPDATE
-    ======================= -->
     <update id="update" parameterType="com.vn.toeic.entity.Vocabulary">
         UPDATE vocabulary
         SET
@@ -65,10 +53,6 @@
         AND del_flg = 0
     </update>
 
-
-    <!-- ======================
-         DELETE (SOFT DELETE)
-    ======================= -->
     <update id="delete" parameterType="com.vn.toeic.entity.Vocabulary">
         UPDATE vocabulary
         SET
@@ -79,15 +63,28 @@
         AND del_flg = 0
     </update>
 
-
-    <!-- ======================
-         FIND BY ID
-    ======================= -->
-    <select id="findById" parameterType="int" resultMap="VocabularyResultMap">
+    <select id="findById" parameterType="int" resultMap="BaseResultMap">
         SELECT *
         FROM vocabulary
         WHERE id = #{id}
         AND del_flg = 0
+    </select>
+
+    <select id="getAllByCreator" resultType="com.vn.toeic.entity.Vocabulary">
+        SELECT
+            WORD_ID,
+            WORD,
+            MEANING,
+            SYNONYMS,
+            EXAMPLE,
+            UPDATER,
+            CREATOR,
+            UPDATED_AT,
+            CREATED_AT,
+            DEL_FLG,
+            VERSION_NO
+        FROM
+            VOCABULARIES
     </select>
 
 </mapper>

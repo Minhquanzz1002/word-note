@@ -19,7 +19,8 @@ public abstract class BaseController<T extends BaseRequest, D extends BaseRespon
     /**
      * Executes the service flow: validate input and process business logic.
      *
-     * @param request the request
+     * @param request  the request
+     * @param response the response
      * @return {@link ResponseEntity} containing the response
      */
     public final ResponseEntity<D> execute(T request, D response) {
@@ -27,7 +28,8 @@ public abstract class BaseController<T extends BaseRequest, D extends BaseRespon
         if (!Objects.equals(ProcessResult.API_RESPONSE_OK, validateResult)) {
             return this.buildValidateResponse(request, response);
         }
-        return process(request, response);
+        D resultResponse = process(request, response);
+        return ResponseEntity.status(HttpStatus.OK).body(resultResponse);
     }
 
     /**
@@ -48,7 +50,7 @@ public abstract class BaseController<T extends BaseRequest, D extends BaseRespon
      * @param response the response
      * @return {@link ResponseEntity} with success response
      */
-    abstract ResponseEntity<D> process(T request, D response);
+    abstract D process(T request, D response);
 
     /**
      * Build error response (common).

@@ -6,6 +6,8 @@ import com.vn.toeic.mapper.IVocabularyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class VocabularyRepository extends BaseRepository<Vocabulary, Integer> {
@@ -39,5 +41,15 @@ public class VocabularyRepository extends BaseRepository<Vocabulary, Integer> {
     @Override
     public Vocabulary findById(Integer id) {
         return vocabularyMapper.findById(id);
+    }
+
+    /**
+     * Retrieves all vocabularies created by the specified creator.
+     *
+     * @param creator the creator ID.
+     * @return the list of vocabularies.
+     */
+    public List<Vocabulary> getAllByCreator(Integer creator) {
+        return vocabularyMapper.getAllByCreator(creator);
     }
 }

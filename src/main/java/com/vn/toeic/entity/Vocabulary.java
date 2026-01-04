@@ -9,6 +9,9 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Vocabulary extends BaseEntity {
+
+    private Integer wordId;
+
     /**
      * The English vocabulary word.
      */

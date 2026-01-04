@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: toeic
+  datasource:
+    url: jdbc:postgresql://localhost:5432/toeic
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml
+  type-aliases-package: com.vn.toeic.entity
+  configuration:
+    map-underscore-to-camel-case: true

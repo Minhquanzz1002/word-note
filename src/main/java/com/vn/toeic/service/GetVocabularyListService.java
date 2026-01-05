@@ -24,11 +24,10 @@ public class GetVocabularyListService extends BaseService<GetVocabularyListReque
     private final VocabularyRepository vocabularyRepository;
 
     /**
-     * Main business logic for retrieving the vocabulary list.
+     * Contains the main business logic of the service.
      *
-     * @param request the base request object containing input conditions
-     *                such as paging or search criteria
-     * @return a {@link GetVocabularyListResponse} containing the vocabulary list
+     * @param request the request.
+     * @return the response
      */
     @Override
     protected GetVocabularyListResponse mainFunc(GetVocabularyListRequest request) {

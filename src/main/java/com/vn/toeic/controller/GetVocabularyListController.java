@@ -34,18 +34,17 @@ public class GetVocabularyListController extends BaseController<GetVocabularyLis
      * with the vocabulary list data
      */
     @GetMapping(ApiEndpoint.GET_VOCABULARY_LIST)
-    public ResponseEntity<GetVocabularyListResponse> getVocabularyListResponseEntityResponse(
-            @Valid @ModelAttribute GetVocabularyListRequest request) {
+    public ResponseEntity<GetVocabularyListResponse> getVocabularyList(@Valid @ModelAttribute GetVocabularyListRequest request) {
         GetVocabularyListResponse response = new GetVocabularyListResponse();
         return this.execute(request, response);
     }
 
     /**
-     * Processes the business logic for retrieving the vocabulary list.
+     * Business processing.
      *
-     * @param request  the base request object from the client
-     * @param response the response object to be populated
-     * @return the populated {@link GetVocabularyListResponse}
+     * @param request  the request
+     * @param response the response
+     * @return {@link ResponseEntity} with success response
      */
     @Override
     ResponseEntity<GetVocabularyListResponse> process(GetVocabularyListRequest request, GetVocabularyListResponse response) {

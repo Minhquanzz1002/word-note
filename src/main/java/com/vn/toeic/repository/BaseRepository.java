@@ -69,6 +69,7 @@ public abstract class BaseRepository<T extends BaseEntity, D> {
                 entity.setCreatedAt(now);
                 entity.setUpdatedAt(now);
                 entity.setVersionNo(VersionNo.INIT);
+                entity.setDelFlg(DelFlg.NOT_DELETED);
             }
             case UPDATE -> entity.setUpdatedAt(now);
             case DELETE -> {

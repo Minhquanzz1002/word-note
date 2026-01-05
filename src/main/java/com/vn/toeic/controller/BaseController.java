@@ -1,6 +1,5 @@
 package com.vn.toeic.controller;
 
-import com.vn.toeic.common.Constant;
 import com.vn.toeic.common.SystemValue.ProcessResult;
 import com.vn.toeic.request.BaseRequest;
 import com.vn.toeic.response.BaseResponse;
@@ -39,7 +38,7 @@ public abstract class BaseController<T extends BaseRequest, D extends BaseRespon
      * @return the validate code
      */
     protected int validate(T request, D response) {
-        return Constant.ProcessResult.API_RESPONSE_OK;
+        return ProcessResult.API_RESPONSE_OK;
     }
 
     /**

@@ -19,55 +19,59 @@
     </resultMap>
 
     <insert id="save" parameterType="com.vn.toeic.entity.Vocabulary">
-        INSERT INTO vocabulary (
-        word,
-        meaning,
-        synonyms,
-        example,
-        created_at,
-        updated_at,
-        del_flg,
-        version_no
+        INSERT INTO vocabularies (
+            word,
+            meaning,
+            synonyms,
+            example,
+            created_at,
+            updated_at,
+            del_flg,
+            version_no
         ) VALUES (
-        #{word},
-        #{meaning},
-        #{synonyms},
-        #{example},
-        #{createdAt},
-        #{updatedAt},
-        #{delFlg},
-        #{versionNo}
+            #{word},
+            #{meaning},
+            #{synonyms},
+            #{example},
+            #{createdAt},
+            #{updatedAt},
+            #{delFlg},
+            #{versionNo}
         )
     </insert>
 
     <update id="update" parameterType="com.vn.toeic.entity.Vocabulary">
-        UPDATE vocabulary
+        UPDATE vocabularies
         SET
-        word = #{word},
-        meaning = #{meaning},
-        synonyms = #{synonyms},
-        example = #{example},
-        updated_at = #{updatedAt},
-        version_no = version_no + 1
-        WHERE id = #{id}
-        AND del_flg = 0
+            word = #{word, jdbcType=TEXT},
+            meaning = #{meaning, jdbcType=TEXT},
+            synonyms = #{synonyms, jdbcType=TEXT},
+            example = #{example, jdbcType=TEXT},
+            updated_at = #{updatedAt},
+            version_no = version_no + ${@com.vn.toeic.common.Constant$Number@ONE}
+        WHERE
+            word_id = #{wordId}
+            AND del_flg = ${@com.vn.toeic.common.Constant$DelFlg@NOT_DELETED}
     </update>
 
     <update id="delete" parameterType="com.vn.toeic.entity.Vocabulary">
-        UPDATE vocabulary
+        UPDATE vocabularies
         SET
-        del_flg = 1,
-        deleted_at = #{deletedAt},
-        updated_at = #{updatedAt}
-        WHERE id = #{id}
-        AND del_flg = 0
+            del_flg = ${@com.vn.toeic.common.Constant$DelFlg@DELETED},
+            updated_at = #{updatedAt}
+        WHERE
+            word_id = #{wordId, jdbcType=INTEGER}
+            AND del_flg = ${@com.vn.toeic.common.Constant$DelFlg@NOT_DELETED}
     </update>
 
     <select id="findById" parameterType="int" resultMap="BaseResultMap">
-        SELECT *
-        FROM vocabulary
-        WHERE id = #{id}
-        AND del_flg = 0
+        SELECT
+            *
+        FROM
+            vocabularies
+        WHERE
+            word_id = #{wordId, jdbcType=INTEGER}
+            AND del_flg = ${@com.vn.toeic.common.Constant$DelFlg@NOT_DELETED}
     </select>
 
     <select id="getAllByCreator" resultType="com.vn.toeic.entity.Vocabulary">

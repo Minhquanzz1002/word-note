@@ -1,11 +1,8 @@
 spring:
   application:
     name: toeic
-  datasource:
-    url: jdbc:postgresql://localhost:5432/demo?currentSchema=toeic
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
+  profiles:
+    active: local
 
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml

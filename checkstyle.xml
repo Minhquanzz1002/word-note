@@ -19,6 +19,11 @@
             <property name="allowMissingReturnTag" value="false"/>
         </module>
 
+        <module name="JavadocType">
+            <property name="scope" value="public"/>
+            <property name="allowMissingParamTags" value="false"/>
+        </module>
+
         <!-- Naming conventions -->
         <module name="MethodName"/>
         <module name="LocalVariableName"/>

@@ -8,10 +8,11 @@ public class Constant {
         private ApiEndpoint() {
         }
 
+        public static final String CREATE_VOCABULARY = "/api/create-vocabulary";
         public static final String GET_VOCABULARY_LIST = "/api/get-vocabulary-list";
         public static final String GET_VOCABULARY_DETAIL = "/api/get-vocabulary-detail";
-        public static final String CREATE_VOCABULARY = "/api/create-vocabulary";
         public static final String UPDATE_VOCABULARY = "/api/update-vocabulary";
+        public static final String DELETE_VOCABULARY = "/api/delete-vocabulary";
     }
 
     public static class DelFlg {

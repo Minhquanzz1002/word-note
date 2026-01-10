@@ -9,12 +9,23 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Response object for getting vocabulary detail.
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class GetVocabularyDetailResponse extends BaseResponse {
 
+    /**
+     * Vocabulary detail data.
+     */
     private Map<String, Object> vocabulary;
 
+    /**
+     * Add vocabulary entity data to response.
+     *
+     * @param voca entity fetched from the database
+     */
     public void addVocabulary(Vocabulary voca) {
         Map<String, Object> vocabularyMap = new LinkedHashMap<>();
         vocabularyMap.put("wordId", voca.getWordId());

@@ -1,6 +1,5 @@
 package com.vn.toeic.service;
 
-import com.vn.toeic.common.Utilities;
 import com.vn.toeic.entity.Vocabulary;
 import com.vn.toeic.repository.VocabularyRepository;
 import com.vn.toeic.request.DeleteVocabularyRequest;

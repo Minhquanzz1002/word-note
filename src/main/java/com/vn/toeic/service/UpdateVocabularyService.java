@@ -30,6 +30,7 @@ public class UpdateVocabularyService extends BaseService<UpdateVocabularyRequest
         Vocabulary vocabulary = new Vocabulary();
         vocabulary.setWordId(request.getWordId());
         vocabulary.setWord(request.getWord());
+        vocabulary.setMeaning(request.getMeaning());
         vocabulary.setSynonyms(Utilities.listToJson(request.getSynonyms()));
         vocabulary.setExample(Utilities.listToJson(request.getExample()));
 

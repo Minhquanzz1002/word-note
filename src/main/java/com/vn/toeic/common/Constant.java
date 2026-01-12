@@ -13,6 +13,8 @@ public class Constant {
         public static final String GET_VOCABULARY_DETAIL = "/api/get-vocabulary-detail";
         public static final String UPDATE_VOCABULARY = "/api/update-vocabulary";
         public static final String DELETE_VOCABULARY = "/api/delete-vocabulary";
+
+        public static final String LOGIN = "/api/login";
     }
 
     public static class DelFlg {

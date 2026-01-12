@@ -1,7 +1,6 @@
 package com.vn.toeic.controller;
 
 import com.vn.toeic.common.Constant.ApiEndpoint;
-import com.vn.toeic.request.CreateVocabularyRequest;
 import com.vn.toeic.request.UpdateVocabularyRequest;
 import com.vn.toeic.response.CreateVocabularyResponse;
 import com.vn.toeic.response.UpdateVocabularyResponse;
@@ -9,7 +8,10 @@ import com.vn.toeic.service.UpdateVocabularyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controller for updating the vocabulary list.

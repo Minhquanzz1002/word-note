@@ -4,9 +4,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * Response object for creating vocabulary.
+ * Response object for login.
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class CreateVocabularyResponse extends BaseResponse {
+public class LoginResponse extends BaseResponse {
 }

@@ -5,17 +5,17 @@
 <mapper namespace="com.vn.toeic.mapper.IVocabularyMapper">
 
     <resultMap id="BaseResultMap" type="com.vn.toeic.entity.Vocabulary">
-        <id property="wordId" column="word_id"/>
-        <result property="word" column="word"/>
-        <result property="meaning" column="meaning"/>
-        <result property="synonyms" column="synonyms"/>
-        <result property="example" column="example"/>
+        <id property="wordId" column="word_id" jdbcType="INTEGER" />
+        <result property="word" column="word" jdbcType="VARCHAR" />
+        <result property="meaning" column="meaning" jdbcType="VARCHAR" />
+        <result property="synonyms" column="synonyms" jdbcType="VARCHAR" />
+        <result property="example" column="example" jdbcType="VARCHAR" />
 
         <!-- BaseEntity fields -->
-        <result property="createdAt" column="created_at"/>
-        <result property="updatedAt" column="updated_at"/>
-        <result property="delFlg" column="del_flg"/>
-        <result property="versionNo" column="version_no"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP" />
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP" />
+        <result property="delFlg" column="del_flg" jdbcType="TINYINT"/>
+        <result property="versionNo" column="version_no" jdbcType="INTEGER"/>
     </resultMap>
 
     <insert id="save" parameterType="com.vn.toeic.entity.Vocabulary">
@@ -29,28 +29,28 @@
             del_flg,
             version_no
         ) VALUES (
-            #{word},
-            #{meaning},
-            #{synonyms},
-            #{example},
-            #{createdAt},
-            #{updatedAt},
-            #{delFlg},
-            #{versionNo}
+            #{word, jdbcType=VARCHAR},
+            #{meaning, jdbcType=VARCHAR},
+            #{synonyms, jdbcType=VARCHAR},
+            #{example, jdbcType=VARCHAR},
+            #{createdAt, jdbcType=TIMESTAMP},
+            #{updatedAt, jdbcType=TIMESTAMP},
+            #{delFlg, jdbcType=TINYINT},
+            #{versionNo, jdbcType=INTEGER}
         )
     </insert>
 
     <update id="update" parameterType="com.vn.toeic.entity.Vocabulary">
         UPDATE vocabularies
         SET
-            word = #{word, jdbcType=TEXT},
-            meaning = #{meaning, jdbcType=TEXT},
-            synonyms = #{synonyms, jdbcType=TEXT},
-            example = #{example, jdbcType=TEXT},
-            updated_at = #{updatedAt},
+            word = #{word, jdbcType=VARCHAR},
+            meaning = #{meaning, jdbcType=VARCHAR},
+            synonyms = #{synonyms, jdbcType=VARCHAR},
+            example = #{example, jdbcType=VARCHAR},
+            updated_at = #{updatedAt, jdbcType=TIMESTAMP},
             version_no = version_no + ${@com.vn.toeic.common.Constant$Number@ONE}
         WHERE
-            word_id = #{wordId}
+            word_id = #{wordId, jdbcType=INTEGER}
             AND del_flg = ${@com.vn.toeic.common.Constant$DelFlg@NOT_DELETED}
     </update>
 
@@ -58,7 +58,7 @@
         UPDATE vocabularies
         SET
             del_flg = ${@com.vn.toeic.common.Constant$DelFlg@DELETED},
-            updated_at = #{updatedAt}
+            updated_at = #{updatedAt, jdbcType=TIMESTAMP}
         WHERE
             word_id = #{wordId, jdbcType=INTEGER}
             AND del_flg = ${@com.vn.toeic.common.Constant$DelFlg@NOT_DELETED}
@@ -66,7 +66,15 @@
 
     <select id="findById" parameterType="int" resultMap="BaseResultMap">
         SELECT
-            *
+            word_id,
+            word,
+            meaning,
+            synonyms,
+            example,
+            created_at,
+            updated_at,
+            del_flg,
+            version_no
         FROM
             vocabularies
         WHERE
@@ -92,6 +100,8 @@
         WHERE
             CREATOR = #{creator, jdbcType=INTEGER}
             AND DEL_FLG = ${@com.vn.toeic.common.Constant$DelFlg@NOT_DELETED}
+        ORDER BY
+            UPDATED_AT DESC
         OFFSET #{offset, jdbcType=INTEGER}
         LIMIT #{limit, jdbcType=INTEGER}
     </select>

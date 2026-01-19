@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class BaseResponse {
-    private Integer statusCode;
-    private Integer processResult;
+    private int statusCode;
+    private int processResult;
     private List<Object> message = new ArrayList<>();
 }

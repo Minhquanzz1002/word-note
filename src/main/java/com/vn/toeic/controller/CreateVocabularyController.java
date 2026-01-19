@@ -1,6 +1,7 @@
 package com.vn.toeic.controller;
 
 import com.vn.toeic.common.Constant.ApiEndpoint;
+import com.vn.toeic.common.SystemValue.ProcessResult;
 import com.vn.toeic.request.CreateVocabularyRequest;
 import com.vn.toeic.response.CreateVocabularyResponse;
 import com.vn.toeic.service.CreateVocabularyService;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Objects;
 
 /**
  * Controller for creating the vocabulary.
@@ -45,6 +48,10 @@ public class CreateVocabularyController extends BaseController<CreateVocabularyR
     @Override
     ResponseEntity<CreateVocabularyResponse> process(CreateVocabularyRequest request, CreateVocabularyResponse response) {
         CreateVocabularyResponse resultResponse = this.service.execute(request);
-        return this.buildNormalResponse(request, resultResponse);
+        if (Objects.equals(resultResponse.getProcessResult(), ProcessResult.API_RESPONSE_OK)) {
+            return this.buildNormalResponse(request, resultResponse);
+        }
+
+        return this.buildBusinessErrorResponse(request, response);
     }
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vn.toeic.mapper.IAuthBaseUserMapper">
+
+    <resultMap id="BaseResultMap" type="com.vn.toeic.entity.AuthBaseUser">
+        <id property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="loginMethod" column="login_method" jdbcType="VARCHAR"/>
+        <result property="firstName" column="first_name" jdbcType="VARCHAR"/>
+        <result property="lastName" column="last_name" jdbcType="VARCHAR"/>
+
+        <!-- BaseEntity fields -->
+        <!-- BaseEntity fields -->
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP" />
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP" />
+        <result property="creator" column="creator" jdbcType="INTEGER" />
+        <result property="updater" column="updater" jdbcType="INTEGER" />
+        <result property="delFlg" column="del_flg" jdbcType="TINYINT"/>
+        <result property="versionNo" column="version_no" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="findByUsernameMap" type="com.vn.toeic.entity.AuthBaseUser" extends="BaseResultMap">
+        <association property="role" javaType="com.vn.toeic.entity.Role" resultMap="com.vn.toeic.mapper.IRoleMapper.BaseResultMap" />
+    </resultMap>
+
+    <select id="findByUsername" resultMap="findByUsernameMap">
+        SELECT
+            USER_ID,
+            USERNAME,
+            EMAIL,
+            PASSWORD,
+            LOGIN_METHOD,
+            FIRST_NAME,
+            LAST_NAME,
+            STATUS,
+            ROLE.NAME,
+            AUTH_BASE_USER.CREATED_AT,
+            AUTH_BASE_USER.UPDATED_AT,
+            AUTH_BASE_USER.DEL_FLG,
+            AUTH_BASE_USER.VERSION_NO
+        FROM
+            AUTH_BASE_USER
+            INNER JOIN ROLE
+                ON ROLE.ROLE_ID = AUTH_BASE_USER.ROLE_ID
+                AND ROLE.DEL_FLG = ${@com.vn.toeic.common.Constant$DelFlg@NOT_DELETED}
+        WHERE
+            USERNAME = #{username, jdbcType=VARCHAR}
+            AND AUTH_BASE_USER.DEL_FLG = ${@com.vn.toeic.common.Constant$DelFlg@NOT_DELETED}
+    </select>
+
+</mapper>

@@ -3,6 +3,9 @@ package com.vn.toeic.controller;
 import com.vn.toeic.common.SystemValue.ProcessResult;
 import com.vn.toeic.request.BaseRequest;
 import com.vn.toeic.response.BaseResponse;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -15,6 +18,14 @@ import java.util.Objects;
  * @param <D> response type, must extend {@link BaseResponse}
  */
 public abstract class BaseController<T extends BaseRequest, D extends BaseResponse> {
+
+    protected HttpServletResponse httpServletResponse;
+
+    @Autowired
+    public void setHttpServletResponse(HttpServletResponse response) {
+        this.httpServletResponse = response;
+    }
+
     /**
      * Executes the service flow: validate input and process business logic.
      *
@@ -49,6 +60,17 @@ public abstract class BaseController<T extends BaseRequest, D extends BaseRespon
      * @return {@link ResponseEntity} with success response
      */
     abstract ResponseEntity<D> process(T request, D response);
+
+    /**
+     * Build business error response.
+     *
+     * @param request  the request.
+     * @param response the response.
+     * @return {@link ResponseEntity} with error response
+     */
+    protected ResponseEntity<D> buildBusinessErrorResponse(T request, D response) {
+        return ResponseEntity.status(HttpStatus.valueOf(response.getStatusCode())).body(response);
+    }
 
     /**
      * Build error response (common).

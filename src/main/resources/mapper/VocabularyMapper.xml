@@ -14,6 +14,8 @@
         <!-- BaseEntity fields -->
         <result property="createdAt" column="created_at" jdbcType="TIMESTAMP" />
         <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP" />
+        <result property="creator" column="creator" jdbcType="INTEGER" />
+        <result property="updater" column="updater" jdbcType="INTEGER" />
         <result property="delFlg" column="del_flg" jdbcType="TINYINT"/>
         <result property="versionNo" column="version_no" jdbcType="INTEGER"/>
     </resultMap>
@@ -99,11 +101,25 @@
             VOCABULARIES
         WHERE
             CREATOR = #{creator, jdbcType=INTEGER}
+            <if test="keyword != null and keyword != ''">
+                AND WORD like CONCAT('%', #{keyword, jdbcType=VARCHAR}, '%')
+            </if>
             AND DEL_FLG = ${@com.vn.toeic.common.Constant$DelFlg@NOT_DELETED}
         ORDER BY
             UPDATED_AT DESC
         OFFSET #{offset, jdbcType=INTEGER}
         LIMIT #{limit, jdbcType=INTEGER}
+    </select>
+
+    <select id="existsVocabularyByCreatorAndWord" resultType="boolean">
+        SELECT
+            CASE WHEN COUNT(*) > 0 THEN TRUE ELSE FALSE END
+        FROM
+            VOCABULARIES
+        WHERE
+            CREATOR = #{creator, jdbcType=INTEGER}
+            AND WORD = #{wordId, jdbcType=VARCHAR}
+            AND DEL_FLG = ${@com.vn.toeic.common.Constant$DelFlg@NOT_DELETED}
     </select>
 
 </mapper>

@@ -46,8 +46,8 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .anyRequest().authenticated()
+//                        .requestMatchers(AUTH_WHITELIST).permitAll()
+                        .anyRequest().permitAll()
                 )
                 .headers(headers -> headers
                         .httpStrictTransportSecurity(HeadersConfigurer.HstsConfig::disable)

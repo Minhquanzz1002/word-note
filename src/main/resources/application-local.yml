@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://dpg-d5fval95pdvs73fjm5q0-a.singapore-postgres.render.com:5432/word_note
-    username: word_note_user
-    password: tA54fPC3lEUl6y2amKKLaRqpXiwINHvi
+    url: jdbc:postgresql://localhost:5432/toeic?currentSchema=public
+    username: postgres
+    password: postgres
     driver-class-name: org.postgresql.Driver
 
 cors:

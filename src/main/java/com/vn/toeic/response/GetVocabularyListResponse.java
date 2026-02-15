@@ -32,6 +32,7 @@ public class GetVocabularyListResponse extends BaseResponse {
         Map<String, Object> vocabularyMap = new LinkedHashMap<>();
         vocabularyMap.put("wordId", vocabulary.getWordId());
         vocabularyMap.put("word", vocabulary.getWord());
+        vocabularyMap.put("wordType", vocabulary.getWordType());
         vocabularyMap.put("meaning", vocabulary.getMeaning());
         vocabularyMap.put("synonyms", synonyms);
         vocabularyMap.put("example", example);

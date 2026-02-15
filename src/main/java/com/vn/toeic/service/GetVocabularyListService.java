@@ -33,8 +33,9 @@ public class GetVocabularyListService extends BaseService<GetVocabularyListReque
     protected GetVocabularyListResponse mainFunc(GetVocabularyListRequest request) {
         Integer offset = Objects.nonNull(request.getOffset()) ? request.getOffset() : 0;
         Integer limit = Objects.nonNull(request.getLimit()) ? request.getLimit() : 20;
+        String keyword = request.getKeyword();
 
-        List<Vocabulary> vocabularies = this.vocabularyRepository.getAllByCreator(1, offset, limit);
+        List<Vocabulary> vocabularies = this.vocabularyRepository.getAllByCreator(1, keyword, offset, limit);
 
         GetVocabularyListResponse response = new GetVocabularyListResponse();
         vocabularies.forEach(v -> {

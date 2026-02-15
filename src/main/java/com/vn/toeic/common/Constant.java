@@ -15,6 +15,7 @@ public class Constant {
         public static final String DELETE_VOCABULARY = "/api/delete-vocabulary";
 
         public static final String LOGIN = "/api/login";
+        public static final String REFRESH_TOKEN = "/api/refresh";
     }
 
     public static class DelFlg {
@@ -43,6 +44,19 @@ public class Constant {
         CREATE,
         UPDATE,
         DELETE;
+    }
+
+    public enum JwtType {
+        ACCESS_TOKEN,
+        REFRESH_TOKEN,
+    }
+
+    public static class UserStatus {
+        private UserStatus() {
+        }
+
+        public static final String ACTIVE = "ACTIVE";
+        public static final String INACTIVE = "INACTIVE";
     }
 
 }

@@ -31,4 +31,9 @@ public class Vocabulary extends BaseEntity {
      * An example sentence demonstrating how the word is used.
      */
     private String example;
+
+    /**
+     * The type of the word.
+     */
+    private String wordType;
 }

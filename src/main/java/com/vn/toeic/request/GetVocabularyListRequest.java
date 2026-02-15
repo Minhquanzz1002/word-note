@@ -21,4 +21,9 @@ public class GetVocabularyListRequest extends BaseRequest {
      */
     @Min(1)
     private Integer limit;
+
+    /**
+     * The keyword for search.
+     */
+    private String keyword;
 }

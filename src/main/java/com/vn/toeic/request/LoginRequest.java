@@ -9,4 +9,15 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class LoginRequest extends BaseRequest {
+
+    /**
+     * The username used for authentication.
+     */
+    private String username;
+
+    /**
+     * The encrypted password of the user.
+     */
+    private String password;
+
 }

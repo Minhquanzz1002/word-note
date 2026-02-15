@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/demo?currentSchema=toeic
+    url: jdbc:postgresql://localhost:5432/toeic?currentSchema=public
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -9,3 +9,11 @@ cors:
   allowed-origins:
     - http://localhost:5173
     - http://localhost:3000
+
+app:
+  auth:
+    token-secret: lNLp8m5m86mRQLgNU7UnhGqfBbNdNYAM45YOFwZmP1w=
+    refresh-token-expiration-milliseconds: 1209600000  # 14 days
+    access-token-expiration-milliseconds: 86400000  # 24 hours
+    reset-token-expiration-milliseconds: 300000
+    register-token-expiration-milliseconds: 300000

@@ -10,6 +10,7 @@
         <result property="meaning" column="meaning" jdbcType="VARCHAR" />
         <result property="synonyms" column="synonyms" jdbcType="VARCHAR" />
         <result property="example" column="example" jdbcType="VARCHAR" />
+        <result property="wordType" column="word_type" jdbcType="VARCHAR" />
 
         <!-- BaseEntity fields -->
         <result property="createdAt" column="created_at" jdbcType="TIMESTAMP" />
@@ -91,6 +92,7 @@
             MEANING,
             SYNONYMS,
             EXAMPLE,
+            WORD_TYPE,
             UPDATER,
             CREATOR,
             UPDATED_AT,

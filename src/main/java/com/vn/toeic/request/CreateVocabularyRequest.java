@@ -1,6 +1,7 @@
 package com.vn.toeic.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -24,6 +25,12 @@ public class CreateVocabularyRequest extends BaseRequest {
      */
     @NotBlank
     private String meaning;
+
+    /**
+     * The type of the word.
+     */
+    @Pattern(regexp = "^(Noun|Verb|Adjective|Adverb|Preposition|Conjunction|Interjection)?$")
+    private String wordType;
 
     /**
      * Synonyms of the word.

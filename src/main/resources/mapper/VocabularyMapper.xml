@@ -27,6 +27,7 @@
             meaning,
             synonyms,
             example,
+            word_type,
             created_at,
             updated_at,
             del_flg,
@@ -36,6 +37,7 @@
             #{meaning, jdbcType=VARCHAR},
             #{synonyms, jdbcType=VARCHAR},
             #{example, jdbcType=VARCHAR},
+            #{wordType, jdbcType=VARCHAR}::word_type_enum,
             #{createdAt, jdbcType=TIMESTAMP},
             #{updatedAt, jdbcType=TIMESTAMP},
             #{delFlg, jdbcType=TINYINT},
@@ -120,7 +122,7 @@
             VOCABULARIES
         WHERE
             CREATOR = #{creator, jdbcType=INTEGER}
-            AND WORD = #{wordId, jdbcType=VARCHAR}
+            AND WORD = #{word, jdbcType=VARCHAR}
             AND DEL_FLG = ${@com.vn.toeic.common.Constant$DelFlg@NOT_DELETED}
     </select>
 

@@ -41,6 +41,7 @@ public class CreateVocabularyService extends BaseService<CreateVocabularyRequest
 
         Vocabulary vocabulary = new Vocabulary();
         vocabulary.setWord(word);
+        vocabulary.setWordType(request.getWordType());
         vocabulary.setMeaning(request.getMeaning());
         vocabulary.setSynonyms(Utilities.listToJson(request.getSynonyms()));
         vocabulary.setExample(Utilities.listToJson(request.getExample()));

@@ -8,7 +8,7 @@ import com.vn.toeic.response.CreateVocabularyResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -16,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
-@WebMvcTest(CreateVocabularyService.class)
+@SpringBootTest
 class CreateVocabularyServiceTests {
 
     @MockitoBean
